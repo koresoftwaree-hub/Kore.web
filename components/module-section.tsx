@@ -1,139 +1,225 @@
 "use client"
 
-import { KoreLogo } from "./kore-logo"
-import { ArrowRight, Smartphone, Zap, Shield } from "lucide-react"
+import { Check, Heart, DollarSign, Package, BarChart3, ShoppingCart, Calendar } from "lucide-react"
+import { 
+  LoyaltyVisual, 
+  FinanceVisual, 
+  InventoryVisual, 
+  AnalyticsVisual, 
+  POSVisual, 
+  BookingVisual 
+} from "@/components/module-visuals"
 
-export function HeroSection() {
+const iconMap = {
+  heart: Heart,
+  dollarSign: DollarSign,
+  package: Package,
+  barChart: BarChart3,
+  shoppingCart: ShoppingCart,
+  calendar: Calendar,
+} as const
+
+const visualMap = {
+  loyalty: LoyaltyVisual,
+  finance: FinanceVisual,
+  inventory: InventoryVisual,
+  analytics: AnalyticsVisual,
+  pos: POSVisual,
+  booking: BookingVisual,
+} as const
+
+type IconName = keyof typeof iconMap
+
+interface Feature {
+  title: string
+  description: string
+}
+
+interface ModuleSectionProps {
+  id: string
+  number: string
+  name: string
+  tagline: string
+  description: string
+  features: Feature[]
+  iconName: IconName
+  visualType: "loyalty" | "finance" | "inventory" | "analytics" | "pos" | "booking"
+  reversed?: boolean
+}
+
+export function ModuleSection({
+  id,
+  number,
+  name,
+  tagline,
+  description,
+  features,
+  iconName,
+  visualType,
+  reversed = false,
+}: ModuleSectionProps) {
+  const Icon = iconMap[iconName]
+  const Visual = visualMap[visualType]
+  
   return (
-    <section id="inicio" className="relative min-h-screen flex items-center pt-16 overflow-hidden">
-      {/* Grid background */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)
-          `,
-          backgroundSize: '80px 80px'
-        }}
-      />
-      
-      {/* Accent gradient */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#0A5A8C]/10 rounded-full blur-3xl pointer-events-none" />
-      
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <div className="inline-flex items-center gap-2 bg-[#1A1A1A] px-4 py-2 mb-8 border border-[#2A2A2A]">
-              <div className="w-2 h-2 bg-[#0A5A8C] rounded-full animate-pulse" />
-              <span className="text-[#6B7280] text-xs uppercase tracking-wider">Ecosistema de Aplicaciones</span>
+    <section 
+      id={id} 
+      className="py-24 px-6 lg:px-12 border-t border-[#1A1A1A]"
+    >
+      <div className="max-w-7xl mx-auto">
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${reversed ? 'lg:flex-row-reverse' : ''}`}>
+          {/* Content */}
+          <div className={reversed ? 'lg:order-2' : ''}>
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-[#0A5A8C] text-sm font-mono">{number}</span>
+              <div className="h-px bg-[#2A2A2A] flex-1 max-w-12" />
+              <div className="w-10 h-10 bg-[#0A5A8C]/10 border border-[#0A5A8C]/30 flex items-center justify-center">
+                <Icon size={20} className="text-[#0A5A8C]" />
+              </div>
             </div>
             
-            <KoreLogo size="xl" className="mb-6" />
+            <h2 className="text-white text-4xl lg:text-5xl font-bold mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
+              Kore <span className="text-[#0A5A8C]">{name}</span>
+            </h2>
             
-            <h1 className="text-white text-3xl lg:text-4xl font-light leading-tight mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
-              El <span className="text-[#0A5A8C] font-medium">core</span> de tu gestión.
-              <br />
-              Todo digitalizado, todo automatizado.
-            </h1>
+            <p className="text-[#6B7280] text-xl mb-6">{tagline}</p>
             
-            <p className="text-[#6B7280] text-lg leading-relaxed mb-8 max-w-xl">
-              Una suite de herramientas digitales a tu medida. No te atamos a una plataforma rígida: ofrecemos aplicaciones web separadas que se adaptan al ritmo de tu proyecto. Software seguro, rápido y enfocado en escalar tus ideas sin complicaciones.
+            <p className="text-[#9CA3AF] leading-relaxed mb-8 max-w-lg">
+              {description}
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <a
-                href="#modulos"
-                className="inline-flex items-center justify-center gap-2 bg-[#0A5A8C] hover:bg-[#0A5A8C]/90 text-white px-8 py-4 text-sm font-medium transition-all duration-200 group"
-              >
-                Conocer Herramientas
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a
-                href="#contacto"
-                className="inline-flex items-center justify-center gap-2 border border-[#2A2A2A] hover:border-[#0A5A8C] text-white px-8 py-4 text-sm font-medium transition-all duration-200"
-              >
-                Solicitar Demo
-              </a>
-            </div>
-            
-            {/* Key features (Los 3 Pilares) */}
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-[#1A1A1A]">
-              <div className="flex flex-col gap-2">
-                <Smartphone size={20} className="text-[#0A5A8C]" />
-                <span className="text-white text-sm font-medium">Digitalizado</span>
-                <span className="text-[#6B7280] text-xs leading-relaxed">Todos tus datos al alcance de tu mano</span>
-              </div>
-              <div className="flex flex-col gap-2">
-                <Zap size={20} className="text-[#0A5A8C]" />
-                <span className="text-white text-sm font-medium">Automatizado</span>
-                <span className="text-[#6B7280] text-xs leading-relaxed">Procesos que funcionan solos, sin intervención</span>
-              </div>
-              <div className="flex flex-col gap-2">
-                <Shield size={20} className="text-[#0A5A8C]" />
-                <span className="text-white text-sm font-medium">Seguro</span>
-                <span className="text-[#6B7280] text-xs leading-relaxed">Tus datos siempre protegidos en la nube</span>
-              </div>
+            <div className="space-y-4">
+              {features.map((feature, i) => (
+                <div key={i} className="flex gap-4">
+                  <div className="w-5 h-5 bg-[#0A5A8C]/10 border border-[#0A5A8C]/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Check size={12} className="text-[#0A5A8C]" />
+                  </div>
+                  <div>
+                    <h4 className="text-white text-sm font-medium mb-1">{feature.title}</h4>
+                    <p className="text-[#6B7280] text-sm">{feature.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
           
-          {/* Visual element (Gráfico de la derecha) */}
-          <div className="hidden lg:block relative">
-            <div className="relative w-full aspect-square max-w-lg mx-auto">
-              {/* Central hub */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-32 h-32 bg-[#0A5A8C] flex items-center justify-center shadow-[0_0_30px_rgba(10,90,140,0.3)]">
-                  <span className="text-white text-2xl font-bold" style={{ fontFamily: 'var(--font-heading)' }}>kore.</span>
-                </div>
-              </div>
-              
-              {/* Orbiting modules */}
-              {[
-                { name: "Loyalty", angle: 0 },
-                { name: "Finance", angle: 60 },
-                { name: "Inventory", angle: 120 },
-                { name: "Analytics", angle: 180 },
-                { name: "POS", angle: 240 },
-                { name: "Booking", angle: 300 },
-              ].map((module, i) => {
-                const radius = 160
-                const x = Math.cos((module.angle * Math.PI) / 180) * radius
-                const y = Math.sin((module.angle * Math.PI) / 180) * radius
-                return (
-                  <div
-                    key={module.name}
-                    className="absolute w-20 h-20 bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center transition-all hover:border-[#0A5A8C] hover:bg-[#121212] z-10"
-                    style={{
-                      left: `calc(50% + ${x}px - 40px)`,
-                      top: `calc(50% + ${y}px - 40px)`,
-                    }}
-                  >
-                    <span className="text-[#6B7280] text-xs font-medium">{module.name}</span>
+          {/* Visual */}
+          <div className={reversed ? 'lg:order-1' : ''}>
+            {visualType === 'loyalty' ? (
+              <>
+                {/* Estilos inyectados para la animación del humito */}
+                <style>{`
+                  @keyframes safe-steam {
+                    0% { transform: translateY(0); opacity: 0; }
+                    20% { opacity: 0.7; }
+                    100% { transform: translateY(-15px); opacity: 0; }
+                  }
+                  .animate-safe-steam {
+                    animation: safe-steam 2.5s ease-out infinite;
+                  }
+                  .steam-delay-1 { animation-delay: 0s; }
+                  .steam-delay-2 { animation-delay: 0.5s; }
+                  .steam-delay-3 { animation-delay: 1s; }
+                `}</style>
+
+                {/* CONTENEDOR PRINCIPAL (Mantiene desplazamiento a la izquierda lg:-ml-12) */}
+                <div className="flex flex-col gap-8 lg:-ml-12 relative z-10 w-full max-w-[450px]">
+                  
+                  {/* PANEL 1: Tarjeta de Fidelización (Tacitas) */}
+                  <div className="border border-[#2A2A2A] bg-[#121212] p-6 rounded-lg shadow-lg flex flex-col gap-5">
+                    {/* Cabecera (Se sacó "En vivo") */}
+                    <div className="flex justify-between items-center pb-1">
+                      <h4 className="text-xs font-mono text-white uppercase tracking-wider">Tarjeta de Fidelización</h4>
+                    </div>
+
+                    {/* Zona de Tacitas (6 llenas, 4 vacías) */}
+                    <div className="bg-[#0A0A0A] p-5 rounded-md border border-[#2A2A2A] flex flex-col gap-4">
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-[#6B7280] text-xs font-mono uppercase tracking-wider">Progreso Cliente</span>
+                        <span className="text-[#0A5A8C] text-xs font-bold font-mono border border-[#0A5A8C]/30 bg-[#0A5A8C]/10 px-2 py-0.5 rounded">6/10</span>
+                      </div>
+                      
+                      <div className="grid grid-cols-5 gap-y-5 gap-x-2 justify-items-center mt-2">
+                        {[...Array(10)].map((_, i) => {
+                          const isFilled = i < 6;
+                          const delayClass = `steam-delay-${(i % 3) + 1}`;
+                          
+                          return (
+                            <div key={i} className="flex justify-center items-center">
+                              <svg viewBox="0 0 100 100" className={`w-9 h-9 ${isFilled ? 'scale-110' : 'scale-100'}`}>
+                                <path d="M20,35 H80 V75 Q80,90 65,90 H35 Q20,90 20,75 Z" fill="none" stroke={isFilled ? "#0A5A8C" : "#2A2A2A"} strokeWidth="5" />
+                                {isFilled && <path d="M24,39 H76 V73 Q76,86 64,86 H36 Q24,86 24,73 Z" fill="#0A5A8C" />}
+                                <path d="M80,45 Q95,45 95,60 T80,75" fill="none" stroke={isFilled ? "#0A5A8C" : "#2A2A2A"} strokeWidth="6" strokeLinecap="round" />
+                                {isFilled && (
+                                  <g className={`animate-safe-steam ${delayClass}`}>
+                                    <path d="M38,30 V12 M50,32 V8 M62,30 V16" stroke="#0A5A8C" strokeWidth="3.5" strokeLinecap="round" fill="none" />
+                                  </g>
+                                )}
+                              </svg>
+                            </div>
+                          )
+                        })}
+                      </div>
+                      <p className="text-[#6B7280] text-[10px] text-center mt-3 uppercase tracking-wider">Completa 10 tazas y lleva tu bebida gratis</p>
+                    </div>
                   </div>
-                )
-              })}
-              
-              {/* Connection lines */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 400">
-                {[0, 60, 120, 180, 240, 300].map((angle, i) => {
-                  const x = Math.cos((angle * Math.PI) / 180) * 120 + 200
-                  const y = Math.sin((angle * Math.PI) / 180) * 120 + 200
-                  return (
-                    <line
-                      key={i}
-                      x1="200"
-                      y1="200"
-                      x2={x}
-                      y2={y}
-                      stroke="#0A5A8C"
-                      strokeWidth="1"
-                      strokeDasharray="4 4"
-                      opacity="0.3"
-                    />
-                  )
-                })}
-              </svg>
-            </div>
+
+                  {/* PANEL 2: Sistema de Puntos (Lista y Premios) */}
+                  <div className="border border-[#2A2A2A] bg-[#121212] p-6 rounded-lg shadow-lg flex flex-col gap-6">
+                    {/* Cabecera (Cambió texto, se sacó "En vivo") */}
+                    <div className="flex justify-between items-center pb-1">
+                      <h4 className="text-xs font-mono text-white uppercase tracking-wider">Sistema de Puntos</h4>
+                    </div>
+
+                    {/* Lista de Clientes */}
+                    <div className="flex flex-col gap-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-[#1A1A1A] flex items-center justify-center border border-[#2A2A2A]">
+                            <span className="text-white font-mono text-xs">MG</span>
+                          </div>
+                          <span className="text-white text-sm font-medium">María García</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-[#0A5A8C] text-sm font-medium">1240 pts</span>
+                          <span className="px-2 py-0.5 border border-[#0A5A8C] text-[#0A5A8C] rounded-full text-[10px] font-mono">VIP</span>
+                        </div>
+                      </div>
+
+                      <hr className="border-t border-[#2A2A2A] opacity-50" />
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-[#1A1A1A] flex items-center justify-center border border-[#2A2A2A]">
+                            <span className="text-[#6B7280] font-mono text-xs">CL</span>
+                          </div>
+                          <span className="text-[#6B7280] text-sm font-medium">Carlos López</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-[#6B7280] text-sm font-medium">890 pts</span>
+                          <span className="px-2 py-0.5 border border-[#2A2A2A] text-[#6B7280] rounded-full text-[10px] font-mono">Gold</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Recuadros de Recompensas */}
+                    <div className="grid grid-cols-2 gap-3 mt-1">
+                      <div className="bg-[#1A1A1A] border border-[#2A2A2A] p-3 rounded-md flex flex-col items-center justify-center text-center">
+                        <span className="text-white text-sm font-bold">100 pts</span>
+                        <span className="text-[#0A5A8C] text-[11px] font-mono mt-1 uppercase tracking-wider">10% Descuento</span>
+                      </div>
+                      <div className="bg-[#1A1A1A] border border-[#2A2A2A] p-3 rounded-md flex flex-col items-center justify-center text-center">
+                        <span className="text-white text-sm font-bold">1000 pts</span>
+                        <span className="text-[#0A5A8C] text-[11px] font-mono mt-1 uppercase tracking-wider">1 Café Gratis</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </>
+            ) : (
+              <Visual />
+            )}
           </div>
         </div>
       </div>
