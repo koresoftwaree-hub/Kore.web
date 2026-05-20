@@ -43,13 +43,11 @@ export function ModulesOverview() {
           <span className="text-[#0A5A8C] text-xs font-mono uppercase tracking-[0.2em] mb-4 block">
             Automatización Digital
           </span>
-          <h2 className="text-white text-4xl lg:text-6xl font-bold mb-6 tracking-tight">
-            Tu proyecto en <span className="text-[#0A5A8C]">piloto automático.</span>
+          <h2 className="text-white text-4xl lg:text-5xl font-bold mb-6 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+            Digitalizá tu día. Automatizá lo aburrido.
           </h2>
           <p className="text-[#6B7280] text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed font-light">
-            Aplicaciones web enfocadas en eliminar las tareas repetitivas y optimizar tus procesos. 
-            Ganá horas libres todos los días, evitá errores manuales y tomá el control de tus datos 
-            en tiempo real desde cualquier dispositivo.
+            Aplicaciones web enfocadas en eliminar las tareas repetitivas y tomar el control de tus datos en tiempo real desde cualquier dispositivo. Resolvemos toda la gestión interna de tu local y, además, sumamos un sistema integral para fidelizar a tus clientes y lograr que siempre quieran volver.
           </p>
         </div>
 
@@ -58,14 +56,20 @@ export function ModulesOverview() {
             <a
               key={tool.name}
               href={tool.href}
-              className="group p-8 bg-[#121212] border border-[#1A1A1A] hover:border-[#0A5A8C]/50 transition-all duration-300 flex flex-col items-center text-center"
+              className="group p-8 bg-[#121212] border border-[#1A1A1A] hover:border-[#0A5A8C]/50 transition-all duration-300 flex flex-col items-center text-center rounded-lg"
             >
-              <div className="w-12 h-12 bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center mb-6 group-hover:bg-[#0A5A8C]/10 group-hover:border-[#0A5A8C]/30 transition-all duration-300">
-                <tool.icon size={24} className="text-[#6B7280] group-hover:text-[#0A5A8C]" />
-              </div>
+              {/* Icono limpio, sin recuadro interno */}
+              <tool.icon 
+                size={36} 
+                className="text-[#6B7280] mb-6 group-hover:text-[#0A5A8C] transition-colors duration-300" 
+                strokeWidth={1.5} 
+              />
+              
+              {/* Título limpio, todo en blanco y sin prefijo */}
               <h3 className="text-white text-lg font-bold mb-2 font-heading tracking-wide">
-                kore.<span className="text-[#0A5A8C]">{tool.name}</span>
+                {tool.name}
               </h3>
+              
               <p className="text-[#6B7280] text-xs leading-relaxed">
                 {tool.description}
               </p>
