@@ -78,10 +78,8 @@ export function HeroSection() {
           </div>
           
           {/* Visual element (Gráfico de la derecha) */}
-          <div className="relative mt-12 lg:mt-0 flex justify-center">
-            {/* Agregué scale-[0.65] para celulares, md:scale-90 para tablets, lg:scale-100 para PC */}
-            <div className="relative w-full aspect-square max-w-lg mx-auto scale-[0.65] md:scale-90 lg:scale-100">
-              
+          <div className="hidden lg:block relative">
+            <div className="relative w-full aspect-square max-w-lg mx-auto">
               {/* Central hub */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-32 h-32 bg-[#0A5A8C] flex items-center justify-center shadow-[0_0_30px_rgba(10,90,140,0.3)] z-20">
@@ -89,13 +87,13 @@ export function HeroSection() {
                 </div>
               </div>
               
-              {/* Orbiting modules (Ahora son 5, separados por 72 grados) */}
+              {/* Orbiting modules (Actualizados a los 5 nuevos) */}
               {[
-                { name: "Loyalty", angle: -90 }, // Arriba
-                { name: "Control", angle: -18 }, // Derecha arriba
-                { name: "Booking", angle: 54 },  // Derecha abajo
-                { name: "Web", angle: 126 },     // Izquierda abajo
-                { name: "Link", angle: 198 },    // Izquierda arriba
+                { name: "Loyalty", angle: -90 },
+                { name: "Control", angle: -18 },
+                { name: "Booking", angle: 54 },
+                { name: "Web", angle: 126 },
+                { name: "Link", angle: 198 },
               ].map((module, i) => {
                 const radius = 160
                 const x = Math.cos((module.angle * Math.PI) / 180) * radius
@@ -109,7 +107,7 @@ export function HeroSection() {
                       top: `calc(50% + ${y}px - 40px)`,
                     }}
                   >
-                    <span className="text-white text-xs font-medium">{module.name}</span>
+                    <span className="text-[#6B7280] text-xs font-medium">{module.name}</span>
                   </div>
                 )
               })}
@@ -127,9 +125,9 @@ export function HeroSection() {
                       x2={x}
                       y2={y}
                       stroke="#0A5A8C"
-                      strokeWidth="1.5"
+                      strokeWidth="1"
                       strokeDasharray="4 4"
-                      opacity="0.4"
+                      opacity="0.3"
                     />
                   )
                 })}
