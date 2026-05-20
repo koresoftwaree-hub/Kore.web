@@ -78,23 +78,24 @@ export function HeroSection() {
           </div>
           
           {/* Visual element (Gráfico de la derecha) */}
-          <div className="hidden lg:block relative">
-            <div className="relative w-full aspect-square max-w-lg mx-auto">
+          <div className="relative mt-12 lg:mt-0 flex justify-center">
+            {/* Agregué scale-[0.65] para celulares, md:scale-90 para tablets, lg:scale-100 para PC */}
+            <div className="relative w-full aspect-square max-w-lg mx-auto scale-[0.65] md:scale-90 lg:scale-100">
+              
               {/* Central hub */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-32 h-32 bg-[#0A5A8C] flex items-center justify-center shadow-[0_0_30px_rgba(10,90,140,0.3)]">
+                <div className="w-32 h-32 bg-[#0A5A8C] flex items-center justify-center shadow-[0_0_30px_rgba(10,90,140,0.3)] z-20">
                   <span className="text-white text-2xl font-bold" style={{ fontFamily: 'var(--font-heading)' }}>kore.</span>
                 </div>
               </div>
               
-              {/* Orbiting modules */}
+              {/* Orbiting modules (Ahora son 5, separados por 72 grados) */}
               {[
-                { name: "Loyalty", angle: 0 },
-                { name: "Finance", angle: 60 },
-                { name: "Inventory", angle: 120 },
-                { name: "Analytics", angle: 180 },
-                { name: "POS", angle: 240 },
-                { name: "Booking", angle: 300 },
+                { name: "Loyalty", angle: -90 }, // Arriba
+                { name: "Control", angle: -18 }, // Derecha arriba
+                { name: "Booking", angle: 54 },  // Derecha abajo
+                { name: "Web", angle: 126 },     // Izquierda abajo
+                { name: "Link", angle: 198 },    // Izquierda arriba
               ].map((module, i) => {
                 const radius = 160
                 const x = Math.cos((module.angle * Math.PI) / 180) * radius
@@ -108,14 +109,14 @@ export function HeroSection() {
                       top: `calc(50% + ${y}px - 40px)`,
                     }}
                   >
-                    <span className="text-[#6B7280] text-xs font-medium">{module.name}</span>
+                    <span className="text-white text-xs font-medium">{module.name}</span>
                   </div>
                 )
               })}
               
               {/* Connection lines */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 400">
-                {[0, 60, 120, 180, 240, 300].map((angle, i) => {
+              <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 400 400">
+                {[-90, -18, 54, 126, 198].map((angle, i) => {
                   const x = Math.cos((angle * Math.PI) / 180) * 120 + 200
                   const y = Math.sin((angle * Math.PI) / 180) * 120 + 200
                   return (
@@ -126,9 +127,9 @@ export function HeroSection() {
                       x2={x}
                       y2={y}
                       stroke="#0A5A8C"
-                      strokeWidth="1"
+                      strokeWidth="1.5"
                       strokeDasharray="4 4"
-                      opacity="0.3"
+                      opacity="0.4"
                     />
                   )
                 })}
