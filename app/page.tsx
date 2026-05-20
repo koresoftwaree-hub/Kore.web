@@ -1,3 +1,6 @@
+"use client"
+
+import { useState } from "react"
 import { Navigation } from "@/components/navigation"
 import { HeroSection } from "@/components/hero-section"
 import { ModulesOverview } from "@/components/modules-overview"
@@ -6,6 +9,9 @@ import { CTASection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 
 export default function HomePage() {
+  // Estado para controlar la visualización del ejemplo de Loyalty
+  const [showLoyaltyExample, setShowLoyaltyExample] = useState(false)
+
   return (
     <main className="min-h-screen bg-[#0A0A0A]">
       <Navigation />
@@ -36,6 +42,34 @@ export default function HomePage() {
           },
         ]}
       />
+
+      {/* Botón interactivo y sección desplegable de Ejemplo Real */}
+      <div className="container mx-auto px-4 pb-16 flex flex-col items-center justify-center">
+        <button
+          onClick={() => setShowLoyaltyExample(!showLoyaltyExample)}
+          className="px-6 py-3 bg-[#0A5A8C] text-white rounded-md font-heading font-medium hover:bg-[#0A5A8C]/80 transition-all cursor-pointer shadow-md"
+        >
+          {showLoyaltyExample ? "Ocultar Ejemplo Real" : "Mira cómo lo hizo tal lugar →"}
+        </button>
+
+        {showLoyaltyExample && (
+          <div className="mt-8 p-6 bg-[#121212] border border-[#2A2A2A] rounded-lg max-w-3xl w-full text-center transition-all animate-in fade-in duration-300">
+            <h4 className="text-xl font-heading font-bold text-white mb-2">
+              Caso de Uso: Cafetería de Especialidad
+            </h4>
+            <p className="text-[#6B7280] text-sm mb-6 max-w-xl mx-auto">
+              Reemplazaron los tradicionales cartoncitos de papel por nuestra interfaz digital de tacitas. Lograron un 30% más de visitas recurrentes en el primer mes y automatizaron avisos de promociones directo por WhatsApp.
+            </p>
+            
+            {/* Contenedor para la Foto/Mockup del carrusel */}
+            <div className="aspect-video bg-[#1A1A1A] rounded-md flex items-center justify-center border border-[#2A2A2A] relative overflow-hidden">
+              <span className="text-xs text-[#6B7280] uppercase tracking-wider">
+                [ Aquí va la foto/mockup del carrusel de la interfaz de Loyalty ]
+              </span>
+            </div>
+          </div>
+        )}
+      </div>
       
       {/* Kore Finance */}
       <ModuleSection
@@ -151,7 +185,7 @@ export default function HomePage() {
         features={[
           {
             title: "Calendario visual",
-            description: "Vista diaria, semanal y mensual. Drag & drop para reprogramar al instante."
+            description: "Vista diaria, semanal and mensual. Drag & drop para reprogramar al instante."
           },
           {
             title: "Recordatorios automáticos",
