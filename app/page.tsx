@@ -7,9 +7,176 @@ import { ModulesOverview } from "@/components/modules-overview"
 import { ModuleSection } from "@/components/module-section"
 import { CTASection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
+import { QrCode, Search, Zap } from "lucide-react"
+// ==========================================
+// COMPONENTES VISUALES INTERNOS PARA LOYALTY
+// ==========================================
+
+interface CupIconProps {
+  isStamped: boolean
+}
+
+function CupIcon({ isStamped }: CupIconProps) {
+  return (
+    <div className="relative flex flex-col items-center">
+      {/* Humito animado sutil en gris Kore */}
+      {isStamped && (
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 flex gap-[3px] animate-[steam_2.5s_ease-out_infinite] opacity-0">
+          <svg width="4" height="12" viewBox="0 0 4 12" fill="none">
+            <path d="M2 0C2.5 1.5 1.5 2.5 2 4C2.5 5.5 1.5 6.5 2 8C2.5 9.5 1.5 10.5 2 12" stroke="#4B5563" strokeWidth="1.5" strokeLinecap="round"/>
+          </svg>
+          <svg width="4" height="10" viewBox="0 0 4 10" fill="none">
+            <path d="M2 0C2.5 1.25 1.5 2 2 3.25C2.5 4.5 1.5 5.25 2 6.5C2.5 7.75 1.5 8.5 2 10" stroke="#4B5563" strokeWidth="1.5" strokeLinecap="round"/>
+          </svg>
+        </div>
+      )}
+
+      {/* Icono minimalista: Azul Kore si está activo, gris oscuro si está vacío */}
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" className="transition-all duration-300">
+        <path d="M4 8H17C17.5 8 18 8.5 18 9V17C18 18.5 16.5 20 15 20H6C4.5 20 3 18.5 3 17V9C3 8.5 3.5 8 4 8Z" 
+              className={isStamped ? "fill-[#0A5A8C]" : "stroke-[#2A2A2A] fill-transparent"} strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M18 10C19.5 10 21 11.5 21 13C21 14.5 19.5 16 18 16" 
+              className={isStamped ? "stroke-[#0A5A8C]" : "stroke-[#2A2A2A]"} strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    </div>
+  )
+}
+
+function LoyaltyStampCardVisual() {
+  const currentStamps = 5
+  const totalStamps = 10
+  
+  return (
+    <div className="border border-[#2A2A2A] bg-[#121212] p-5 rounded-lg w-full max-w-[320px] shadow-lg">
+      <h5 className="text-sm font-heading text-white font-bold mb-4 text-center tracking-wide">TARJETA DIGITAL</h5>
+      
+      {/* Grilla técnica y minimalista */}
+      <div className="grid grid-cols-5 gap-x-3 gap-y-5 mb-5 bg-[#0A0A0A] p-4 rounded-md border border-[#2A2A2A]">
+        {Array.from({ length: totalStamps }, (_, i) => (
+          <CupIcon key={i} isStamped={i < currentStamps} />
+        ))}
+      </div>
+
+      <div className="text-center text-white mb-5">
+        <p className="text-[#6B7280] text-[11px] mb-1 uppercase tracking-wider">Progreso de Recompensa</p>
+        <p className="text-xl font-body font-bold"><span className="text-[#0A5A8C]">{currentStamps}</span><span className="text-[#6B7280]">/{totalStamps}</span></p>
+      </div>
+
+      <div className="flex flex-col items-center gap-3">
+        {/* QR adaptado al modo oscuro */}
+        <div className="bg-[#1A1A1A] p-3 rounded-md border border-[#2A2A2A]">
+          <QrCode className="size-14 text-white" strokeWidth={1.2} />
+        </div>
+        <span className="text-[#6B7280] text-[10px] uppercase tracking-wider">ID: KORE-8492</span>
+      </div>
+    </div>
+  )
+}
+
+interface CustomerRowProps {
+  name: string
+  points: number
+  status: string
+  initials: string
+}
+
+function CustomerRow({ name, points, status, initials }: CustomerRowProps) {
+  const isVip = status === "VIP"
+  return (
+    <div className="flex items-center justify-between p-3 border-b border-[#2A2A2A] hover:bg-[#1A1A1A] transition-colors last:border-b-0">
+      <div className="flex items-center gap-3">
+        <div className="size-8 rounded-full bg-[#1A1A1A] flex items-center justify-center border border-[#2A2A2A]">
+          <span className="text-white font-mono text-xs">{initials}</span>
+        </div>
+        <div className="flex flex-col">
+          <span className="text-white text-xs font-body font-medium">{name}</span>
+          <div className="flex items-center gap-1">
+            <Zap className="size-3 text-[#0A5A8C]" />
+            <span className="text-[#0A5A8C] text-xs font-body font-medium">{points} pts</span>
+          </div>
+        </div>
+      </div>
+      <div className={`px-2 py-0.5 border rounded-full text-[10px] font-mono ${isVip ? "text-[#0A5A8C] border-[#0A5A8C]" : "text-[#6B7280] border-[#2A2A2A]"}`}>
+        {status}
+      </div>
+    </div>
+  )
+}
+
+function LoyaltyDashboardModifiedVisual() {
+  const customers = [
+    { name: "María García", points: 1240, status: "VIP", initials: "MG" },
+    { name: "Carlos López", points: 890, status: "Gold", initials: "CL" },
+    { name: "Ana Martínez", points: 650, status: "Silver", initials: "AM" },
+  ]
+
+  return (
+    <div className="border border-[#2A2A2A] bg-[#121212] p-5 rounded-lg w-full max-w-[360px] shadow-lg">
+      <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#2A2A2A]">
+        <div className="flex items-center gap-2">
+          <Search className="size-3.5 text-[#6B7280]" />
+          <span className="text-[#6B7280] text-xs font-body">Buscar clientes...</span>
+        </div>
+        <span className="flex items-center gap-1 text-[#0A5A8C] text-[10px] font-mono tracking-wider">
+          <span className="size-1.5 rounded-full bg-[#0A5A8C] animate-pulse"></span>
+          EN VIVO
+        </span>
+      </div>
+
+      <div className="space-y-0.5 mb-5">
+        {customers.map((customer, index) => (
+          <CustomerRow key={index} {...customer} />
+        ))}
+      </div>
+
+      <div className="border border-[#2A2A2A] bg-[#0A0A0A] p-3 rounded-md text-center">
+        <p className="text-xs font-body font-medium text-white mb-1">Reglas Activas</p>
+        <p className="text-[#6B7280] text-[10px] font-mono uppercase tracking-wide">1000 pts = Descuento | 1240 pts = VIP Gratis</p>
+      </div>
+    </div>
+  )
+}
+function LoyaltyDashboardModifiedVisual() {
+  const customers = [
+    { name: "María García", points: 1240, status: "VIP", initials: "MG" },
+    { name: "Carlos López", points: 890, status: "Gold", initials: "CL" },
+    { name: "Ana Martínez", points: 650, status: "Silver", initials: "AM" },
+  ]
+
+  return (
+    <div className="border border-[#2A2A2A] bg-[#121212] p-5 rounded-lg w-full max-w-[360px] shadow-lg">
+      <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#2A2A2A]">
+        <div className="flex items-center gap-2">
+          <Search className="size-3.5 text-[#6B7280]" />
+          <span className="text-[#6B7280] text-xs font-body">Buscar clientes...</span>
+        </div>
+        <span className="flex items-center gap-1 text-[#0A5A8C] text-[10px] font-mono">
+          <span className="size-1.5 rounded-full bg-[#0A5A8C] animate-pulse"></span>
+          En vivo
+        </span>
+      </div>
+
+      {/* Lista de Clientes sin las tarjetas de arriba */}
+      <div className="space-y-0.5 mb-5">
+        {customers.map((customer, index) => (
+          <CustomerRow key={index} {...customer} />
+        ))}
+      </div>
+
+      {/* Panel de Reglas Personalizables */}
+      <div className="border border-[#2A2A2A] bg-[#1A1A1A] p-3 rounded-md text-center">
+        <p className="text-xs font-body font-medium text-white">Reglas de Fidelización Activas</p>
+        <p className="text-[#6B7280] text-[11px] mt-1">1000 pts = Descuento | 1240 pts = Café gratis (VIP)</p>
+      </div>
+    </div>
+  )
+}
+
+// ==========================================
+// COMPONENTE PRINCIPAL DE LA PÁGINA
+// ==========================================
 
 export default function HomePage() {
-  // Estado para controlar la visualización del ejemplo de Loyalty
   const [showLoyaltyExample, setShowLoyaltyExample] = useState(false)
 
   return (
@@ -43,29 +210,28 @@ export default function HomePage() {
         ]}
       />
 
-      {/* Botón interactivo y sección desplegable de Ejemplo Real */}
-      <div className="container mx-auto px-4 pb-16 flex flex-col items-center justify-center">
+      {/* Botón desplegable interactivo para los ejemplos de tarjetas reales */}
+      <div className="container mx-auto px-4 pb-20 flex flex-col items-center justify-center">
         <button
           onClick={() => setShowLoyaltyExample(!showLoyaltyExample)}
-          className="px-6 py-3 bg-[#0A5A8C] text-white rounded-md font-heading font-medium hover:bg-[#0A5A8C]/80 transition-all cursor-pointer shadow-md"
+          className="px-6 py-3 bg-[#0A5A8C] text-white rounded-md font-heading font-medium hover:bg-[#0A5A8C]/80 transition-all cursor-pointer shadow-md text-sm"
         >
-          {showLoyaltyExample ? "Ocultar Ejemplo Real" : "Mira cómo lo hizo tal lugar →"}
+          {showLoyaltyExample ? "Ocultar Demostración Visual" : "Mira cómo lo hizo tal lugar →"}
         </button>
 
         {showLoyaltyExample && (
-          <div className="mt-8 p-6 bg-[#121212] border border-[#2A2A2A] rounded-lg max-w-3xl w-full text-center transition-all animate-in fade-in duration-300">
+          <div className="mt-8 p-6 bg-[#121212] border border-[#2A2A2A] rounded-lg max-w-4xl w-full text-center transition-all animate-in fade-in duration-300">
             <h4 className="text-xl font-heading font-bold text-white mb-2">
-              Caso de Uso: Cafetería de Especialidad
+              Caso de Uso Aplicado: Cafeterías y Locales Comerciales
             </h4>
-            <p className="text-[#6B7280] text-sm mb-6 max-w-xl mx-auto">
-              Reemplazaron los tradicionales cartoncitos de papel por nuestra interfaz digital de tacitas. Lograron un 30% más de visitas recurrentes en el primer mes y automatizaron avisos de promociones directo por WhatsApp.
+            <p className="text-[#6B7280] text-sm mb-8 max-w-2xl mx-auto">
+              Visualizá cómo conviven ambas opciones en Kore. Podés ofrecer la tradicional tarjeta de sellos trackeada digitalmente o gestionar un panel completo de puntajes asignando premios específicos por nivel de cliente.
             </p>
             
-            {/* Contenedor para la Foto/Mockup del carrusel */}
-            <div className="aspect-video bg-[#1A1A1A] rounded-md flex items-center justify-center border border-[#2A2A2A] relative overflow-hidden">
-              <span className="text-xs text-[#6B7280] uppercase tracking-wider">
-                [ Aquí va la foto/mockup del carrusel de la interfaz de Loyalty ]
-              </span>
+            {/* Contenedor flexible con los dos enfoques reales que definimos */}
+            <div className="flex flex-col md:flex-row gap-8 justify-center items-center md:items-stretch">
+              <LoyaltyStampCardVisual />
+              <LoyaltyDashboardModifiedVisual />
             </div>
           </div>
         )}
@@ -185,7 +351,7 @@ export default function HomePage() {
         features={[
           {
             title: "Calendario visual",
-            description: "Vista diaria, semanal and mensual. Drag & drop para reprogramar al instante."
+            description: "Vista diaria, semanal y mensual. Drag & drop para reprogramar al instante."
           },
           {
             title: "Recordatorios automáticos",
