@@ -23,7 +23,7 @@ const tools = [
   },
   {
     name: "Web",
-    description: "Tu identidad digital y presencia en la nube.",
+    description: "Tu identidad digital y presencia en un solo lugar, una web.",
     icon: Globe,
     href: "#web",
   },
@@ -44,10 +44,10 @@ export function ModulesOverview() {
             Automatización Digital
           </span>
           <h2 className="text-white text-4xl lg:text-5xl font-bold mb-6 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
-            Digitalizá tu día. Automatizá lo aburrido.
+            Digitalizá y Automatizá tu día.
           </h2>
           <p className="text-[#6B7280] text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed font-light">
-            Aplicaciones web enfocadas en eliminar las tareas repetitivas y tomar el control de tus datos en tiempo real desde cualquier dispositivo. Resolvemos toda la gestión interna de tu local y, además, sumamos un sistema integral para fidelizar a tus clientes y lograr que siempre quieran volver.
+            Aplicaciones web enfocadas en eliminar las tareas repetitivas y tomar el control de tus datos en tiempo real desde cualquier dispositivo. Resolvemos toda la gestión interna de tu local,hacemos que tengas toda la informacion ordenada, una web y además, sumamos un sistema integral para fidelizar a tus clientes y lograr que siempre quieran volver.
           </p>
         </div>
 
