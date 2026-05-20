@@ -41,7 +41,6 @@ export function ModulesOverview() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="text-center mb-20">
           <span className="text-[#0A5A8C] text-xs font-mono uppercase tracking-[0.2em] mb-4 block">
-          kore.
           </span>
           <h2 className="text-white text-4xl lg:text-5xl font-bold mb-6 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
             Digitalizá y automatizá tu día a día.
