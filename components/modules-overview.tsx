@@ -1,83 +1,73 @@
 "use client"
 
-import { Heart, DollarSign, Package, BarChart3, ShoppingCart, Calendar } from "lucide-react"
+import { Heart, LayoutDashboard, Calendar, Globe, Share2 } from "lucide-react"
 
-const modules = [
+const tools = [
   {
-    id: "loyalty",
     name: "Loyalty",
+    description: "Retención automatizada y fidelización real.",
     icon: Heart,
-    description: "Retención automatizada",
-    color: "#0A5A8C",
+    href: "#loyalty",
   },
   {
-    id: "finance",
-    name: "Finance",
-    icon: DollarSign,
-    description: "Control financiero total",
-    color: "#0A5A8C",
+    name: "Control",
+    description: "Finanzas, stock y métricas en un solo lugar.",
+    icon: LayoutDashboard,
+    href: "#finance",
   },
   {
-    id: "inventory",
-    name: "Inventory",
-    icon: Package,
-    description: "Stock en tiempo real",
-    color: "#0A5A8C",
-  },
-  {
-    id: "analytics",
-    name: "Analytics",
-    icon: BarChart3,
-    description: "Métricas que importan",
-    color: "#0A5A8C",
-  },
-  {
-    id: "pos",
-    name: "POS",
-    icon: ShoppingCart,
-    description: "Ventas integradas",
-    color: "#0A5A8C",
-  },
-  {
-    id: "booking",
     name: "Booking",
+    description: "Agenda inteligente y gestión de turnos.",
     icon: Calendar,
-    description: "Agenda inteligente",
-    color: "#0A5A8C",
+    href: "#booking",
+  },
+  {
+    name: "Web",
+    description: "Tu identidad digital y presencia en la nube.",
+    icon: Globe,
+    href: "#web",
+  },
+  {
+    name: "Link",
+    description: "Conectá todas tus redes en un solo punto.",
+    icon: Share2,
+    href: "#link",
   },
 ]
 
 export function ModulesOverview() {
   return (
-    <section id="modulos" className="py-24 px-6 lg:px-12 border-t border-[#1A1A1A]">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <span className="text-[#0A5A8C] text-sm uppercase tracking-widest block mb-4">Ecosistema Modular</span>
-          <h2 className="text-white text-4xl lg:text-5xl font-bold mb-6" style={{ fontFamily: 'var(--font-heading)' }}>
-            Seis módulos.<br />Una plataforma.
+    <section className="py-24 bg-[#0A0A0A] border-t border-[#1A1A1A]">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="text-center mb-20">
+          <span className="text-[#0A5A8C] text-xs font-mono uppercase tracking-[0.2em] mb-4 block">
+            Automatización Digital
+          </span>
+          <h2 className="text-white text-4xl lg:text-6xl font-bold mb-6 tracking-tight">
+            Tu proyecto en <span className="text-[#0A5A8C]">piloto automático.</span>
           </h2>
-          <p className="text-[#6B7280] text-lg max-w-2xl mx-auto leading-relaxed">
-            Cada módulo funciona de forma independiente, pero juntos crean un sistema de gestión 
-            completamente integrado. Activa solo lo que tu negocio necesita.
+          <p className="text-[#6B7280] text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed font-light">
+            Aplicaciones web enfocadas en eliminar las tareas repetitivas y optimizar tus procesos. 
+            Ganá horas libres todos los días, evitá errores manuales y tomá el control de tus datos 
+            en tiempo real desde cualquier dispositivo.
           </p>
         </div>
-        
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {modules.map((module) => (
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          {tools.map((tool) => (
             <a
-              key={module.id}
-              href={`#${module.id}`}
-              className="group bg-[#121212] border border-[#1A1A1A] p-6 transition-all duration-300 hover:border-[#0A5A8C] hover:bg-[#0A0A0A]"
+              key={tool.name}
+              href={tool.href}
+              className="group p-8 bg-[#121212] border border-[#1A1A1A] hover:border-[#0A5A8C]/50 transition-all duration-300 flex flex-col items-center text-center"
             >
-              <module.icon 
-                size={32} 
-                className="text-[#6B7280] group-hover:text-[#0A5A8C] transition-colors mb-4" 
-              />
-              <h3 className="text-white text-lg font-semibold mb-1" style={{ fontFamily: 'var(--font-heading)' }}>
-                {module.name}
+              <div className="w-12 h-12 bg-[#1A1A1A] border border-[#2A2A2A] flex items-center justify-center mb-6 group-hover:bg-[#0A5A8C]/10 group-hover:border-[#0A5A8C]/30 transition-all duration-300">
+                <tool.icon size={24} className="text-[#6B7280] group-hover:text-[#0A5A8C]" />
+              </div>
+              <h3 className="text-white text-lg font-bold mb-2 font-heading tracking-wide">
+                kore.<span className="text-[#0A5A8C]">{tool.name}</span>
               </h3>
-              <p className="text-[#6B7280] text-xs">
-                {module.description}
+              <p className="text-[#6B7280] text-xs leading-relaxed">
+                {tool.description}
               </p>
             </a>
           ))}
