@@ -8,6 +8,7 @@ import { ModuleSection } from "@/components/module-section"
 import { CTASection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 import { QrCode, Search, Zap } from "lucide-react"
+
 // ==========================================
 // COMPONENTES VISUALES INTERNOS PARA LOYALTY
 // ==========================================
@@ -132,41 +133,6 @@ function LoyaltyDashboardModifiedVisual() {
       <div className="border border-[#2A2A2A] bg-[#0A0A0A] p-3 rounded-md text-center">
         <p className="text-xs font-body font-medium text-white mb-1">Reglas Activas</p>
         <p className="text-[#6B7280] text-[10px] font-mono uppercase tracking-wide">1000 pts = Descuento | 1240 pts = VIP Gratis</p>
-      </div>
-    </div>
-  )
-}
-function LoyaltyDashboardModifiedVisual() {
-  const customers = [
-    { name: "María García", points: 1240, status: "VIP", initials: "MG" },
-    { name: "Carlos López", points: 890, status: "Gold", initials: "CL" },
-    { name: "Ana Martínez", points: 650, status: "Silver", initials: "AM" },
-  ]
-
-  return (
-    <div className="border border-[#2A2A2A] bg-[#121212] p-5 rounded-lg w-full max-w-[360px] shadow-lg">
-      <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#2A2A2A]">
-        <div className="flex items-center gap-2">
-          <Search className="size-3.5 text-[#6B7280]" />
-          <span className="text-[#6B7280] text-xs font-body">Buscar clientes...</span>
-        </div>
-        <span className="flex items-center gap-1 text-[#0A5A8C] text-[10px] font-mono">
-          <span className="size-1.5 rounded-full bg-[#0A5A8C] animate-pulse"></span>
-          En vivo
-        </span>
-      </div>
-
-      {/* Lista de Clientes sin las tarjetas de arriba */}
-      <div className="space-y-0.5 mb-5">
-        {customers.map((customer, index) => (
-          <CustomerRow key={index} {...customer} />
-        ))}
-      </div>
-
-      {/* Panel de Reglas Personalizables */}
-      <div className="border border-[#2A2A2A] bg-[#1A1A1A] p-3 rounded-md text-center">
-        <p className="text-xs font-body font-medium text-white">Reglas de Fidelización Activas</p>
-        <p className="text-[#6B7280] text-[11px] mt-1">1000 pts = Descuento | 1240 pts = Café gratis (VIP)</p>
       </div>
     </div>
   )
