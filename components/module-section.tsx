@@ -107,40 +107,63 @@ export function ModuleSection({
           <div className={reversed ? 'lg:order-1' : ''}>
             {visualType === 'loyalty' ? (
               
-              /* NUESTRO PANEL ESTATICO DE LOYALTY */
+              /* PANEL ESTATICO DE LOYALTY (CON TAZAS BEKI EN ESTILO KORE) */
               <div className="border border-[#2A2A2A] bg-[#121212] p-6 rounded-lg w-full max-w-[450px] shadow-lg flex flex-col gap-6">
                 
                 {/* Cabecera */}
                 <div className="flex justify-between items-center">
-                  <h4 className="text-xs font-mono text-[#6B7280] uppercase tracking-wider">Panel de Fidelización</h4>
+                  <h4 className="text-xs font-mono text-[#6B7280] uppercase tracking-wider">Tarjeta de Fidelización</h4>
                   <span className="flex items-center gap-1.5 text-[#0A5A8C] text-xs font-mono">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#0A5A8C]"></span>
                     En vivo
                   </span>
                 </div>
 
-                {/* Zona de Tacitas (6 de 10) */}
+                {/* Zona de Tacitas Beki (6 llenas, 4 vacías) */}
                 <div className="bg-[#0A0A0A] p-5 rounded-md border border-[#2A2A2A] flex flex-col gap-4">
-                  <div className="flex justify-between items-center">
-                    <span className="text-white text-sm font-body">Tarjeta del Cliente</span>
-                    <span className="text-[#0A5A8C] text-sm font-bold font-mono">6/10</span>
+                  <div className="flex justify-between items-center mb-1">
+                    <span className="text-[#6B7280] text-xs font-mono uppercase tracking-wider">Progreso Cliente</span>
+                    <span className="text-[#0A5A8C] text-xs font-bold font-mono border border-[#0A5A8C]/30 bg-[#0A5A8C]/10 px-2 py-0.5 rounded">6/10</span>
                   </div>
                   
-                  <div className="grid grid-cols-5 gap-y-4 gap-x-2">
-                    {[...Array(10)].map((_, i) => (
-                      <div key={i} className="flex justify-center">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className={i < 6 ? "text-[#0A5A8C]" : "text-[#2A2A2A]"}>
-                          <path d="M4 8H17C17.5 8 18 8.5 18 9V17C18 18.5 16.5 20 15 20H6C4.5 20 3 18.5 3 17V9C3 8.5 3.5 8 4 8Z" 
-                                className={i < 6 ? "fill-current" : "stroke-current fill-transparent"} strokeWidth="1.5" strokeLinecap="round"/>
-                          <path d="M18 10C19.5 10 21 11.5 21 13C21 14.5 19.5 16 18 16" 
-                                stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                        </svg>
-                      </div>
-                    ))}
+                  <div className="grid grid-cols-5 gap-y-5 gap-x-2 justify-items-center mt-2">
+                    {[...Array(10)].map((_, i) => {
+                      const isFilled = i < 6;
+                      return (
+                        <div key={i} className="flex justify-center items-center">
+                          {/* SVG adaptado directo del código de Beki */}
+                          <svg viewBox="0 0 100 100" className={`w-9 h-9 ${isFilled ? 'scale-110' : 'scale-100'}`}>
+                            {/* Borde de la taza */}
+                            <path 
+                              d="M20,35 H80 V75 Q80,90 65,90 H35 Q20,90 20,75 Z" 
+                              fill="none" 
+                              stroke={isFilled ? "#0A5A8C" : "#2A2A2A"} 
+                              strokeWidth="5" 
+                            />
+                            {/* Relleno de la taza */}
+                            {isFilled && (
+                              <path 
+                                d="M24,39 H76 V73 Q76,86 64,86 H36 Q24,86 24,73 Z" 
+                                fill="#0A5A8C" 
+                              />
+                            )}
+                            {/* Asa de la taza */}
+                            <path 
+                              d="M80,45 Q95,45 95,60 T80,75" 
+                              fill="none" 
+                              stroke={isFilled ? "#0A5A8C" : "#2A2A2A"} 
+                              strokeWidth="6" 
+                              strokeLinecap="round" 
+                            />
+                          </svg>
+                        </div>
+                      )
+                    })}
                   </div>
+                  <p className="text-[#6B7280] text-[10px] text-center mt-3 uppercase tracking-wider">Completa 10 tazas y lleva tu bebida gratis</p>
                 </div>
 
-                {/* Lista de Clientes con Divisores Blancos Sutiles */}
+                {/* Lista de Clientes */}
                 <div className="flex flex-col gap-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -155,7 +178,7 @@ export function ModuleSection({
                     </div>
                   </div>
 
-                  {/* LÍNEA DIVISORA */}
+                  {/* LÍNEA DIVISORA BLANCA SUTIL */}
                   <hr className="border-t border-white/10" />
 
                   <div className="flex items-center justify-between">
@@ -176,11 +199,11 @@ export function ModuleSection({
                 <div className="grid grid-cols-2 gap-3 mt-2">
                   <div className="bg-[#1A1A1A] border border-[#2A2A2A] p-3 rounded-md flex flex-col items-center justify-center text-center">
                     <span className="text-white text-sm font-bold">100 pts</span>
-                    <span className="text-[#0A5A8C] text-xs font-medium mt-1">10% Descuento</span>
+                    <span className="text-[#0A5A8C] text-[11px] font-mono mt-1 uppercase tracking-wider">10% Descuento</span>
                   </div>
                   <div className="bg-[#1A1A1A] border border-[#2A2A2A] p-3 rounded-md flex flex-col items-center justify-center text-center">
                     <span className="text-white text-sm font-bold">1000 pts</span>
-                    <span className="text-[#0A5A8C] text-xs font-medium mt-1">1 Café Gratis</span>
+                    <span className="text-[#0A5A8C] text-[11px] font-mono mt-1 uppercase tracking-wider">1 Café Gratis</span>
                   </div>
                 </div>
               </div>
