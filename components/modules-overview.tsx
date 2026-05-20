@@ -41,10 +41,10 @@ export function ModulesOverview() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="text-center mb-20">
           <span className="text-[#0A5A8C] text-xs font-mono uppercase tracking-[0.2em] mb-4 block">
-            Automatización Digital
+          kore.
           </span>
           <h2 className="text-white text-4xl lg:text-5xl font-bold mb-6 tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
-            Digitalizá y Automatizá tu día.
+            Digitalizá y automatizá tu día a día.
           </h2>
           <p className="text-[#6B7280] text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed font-light">
             Aplicaciones web enfocadas en eliminar las tareas repetitivas y tomar el control de tus datos en tiempo real desde cualquier dispositivo. Resolvemos toda la gestión interna de tu local,hacemos que tengas toda la informacion ordenada, una web y además, sumamos un sistema integral para fidelizar a tus clientes y lograr que siempre quieran volver.
