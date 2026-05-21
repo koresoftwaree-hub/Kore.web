@@ -6,13 +6,12 @@ import { Menu, X } from "lucide-react"
 
 const navLinks = [
   { name: "Inicio", href: "#inicio" },
-  { name: "Módulos", href: "#modulos" },
+  { name: "Apps", href: "#modulos" },
   { name: "Loyalty", href: "#loyalty" },
-  { name: "Finance", href: "#finance" },
-  { name: "Inventory", href: "#inventory" },
-  { name: "Analytics", href: "#analytics" },
-  { name: "POS", href: "#pos" },
+  { name: "Control", href: "#finance" },
   { name: "Booking", href: "#booking" },
+  { name: "Web", href: "#web" },
+  { name: "Link", href: "#link" },
 ]
 
 export function Navigation() {
