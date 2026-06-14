@@ -91,30 +91,34 @@ export default function Home() {
         iconName="calendar"
         visualType="booking"
       />
-
-      {/* 04 | WEB */}
+  
+  
+  
+  
+  
+  {/* 04 | WEB */}
       <ModuleSection
         id="web"
         number="04"
         name="Web"
-        tagline="Tu identidad digital, profesional y autogestionable."
-        description="Llevá tu marca a internet sin depender de plataformas de terceros ni lidiar con código. Creamos una página web rápida y segura, diseñada a medida para que puedas mostrar tu catálogo, servicios o menú respetando al 100% tu estética."
+        tagline="Presencia digital de alto nivel para tu negocio."
+        description="Una página web estática, ultrarrápida y elegante, diseñada para exhibir tus servicios y portafolio al mundo. Transmití máxima autoridad con un diseño a medida, sin depender de plataformas pesadas o complejas."
         features={[
           {
-            title: "Diseño a medida",
-            description: "Estética limpia y profesional (modo oscuro o claro) que respira la identidad única de tu proyecto."
+            title: "Diseño institucional a medida",
+            description: "Estética profesional que respira la identidad de tu marca, ideal para mostrar tu catálogo o servicios."
           },
           {
-            title: "Catálogo y Menú digital",
-            description: "Exhibí lo que hacés de forma clara, con imágenes y descripciones fáciles de actualizar."
+            title: "Velocidad extrema",
+            description: "Al ser una web estática, carga al instante en cualquier dispositivo, mejorando la experiencia del usuario."
           },
           {
             title: "Cero mantenimiento técnico",
-            description: "Nosotros nos encargamos de los servidores y la seguridad. Vos solo te preocupás por tu contenido."
+            description: "Nosotros nos encargamos del hosting y la seguridad. Tu página simplemente funciona 24/7."
           }
         ]}
-        iconName="package"
-        visualType="pos"
+        iconName="package" // Podrías cambiar esto a "globe" si lo agregas a tu iconMap en module-section.tsx
+        visualType="web"   // <-- Asegurate de mapear "web" en tu module-section.tsx
         reversed={true}
       />
 
@@ -123,27 +127,29 @@ export default function Home() {
         id="link"
         number="05"
         name="Link"
-        tagline="Un solo link para conectar todo tu mundo digital."
-        description="Optimizá la biografía de tus redes sociales. Una landing page minimalista y rapidísima que agrupa tu WhatsApp, tu web, tus reservas y tus redes en un solo lugar. La puerta de entrada perfecta para convertir seguidores en clientes."
+        tagline="Tu puerta de entrada unificada estilo Linktree."
+        description="Consolidá todas tus redes sociales, vías de contacto y enlaces importantes en un solo link inteligente. Totalmente personalizado con tu identidad visual, es ideal para optimizar la biografía de tu Instagram o TikTok."
         features={[
           {
-            title: "Conexión total",
-            description: "Agregá botones directos hacia tus reservas, menú, ubicación en el mapa y contacto directo."
+            title: "Todos tus links en un solo lugar",
+            description: "Derivá tráfico a tu WhatsApp, reservas, menú o sitio web desde una única pantalla optimizada para celular."
           },
           {
-            title: "Personalización de marca",
-            description: "Colores, logos y tipografías que mantienen la coherencia visual con el resto de tus aplicaciones."
+            title: "Diseño 100% propio",
+            description: "A diferencia de Linktree, acá no hay logos de terceros. Lleva tus colores, tu tipografía y tu estilo."
           },
           {
-            title: "Métricas integradas",
-            description: "Descubrí qué botones tocan más tus clientes para entender qué es lo que más buscan."
+            title: "Fácil de actualizar",
+            description: "Cambia el orden, agrega o quita botones rápidamente según las necesidades o promociones de tu local."
           }
         ]}
-        iconName="barChart"
-        visualType="analytics"
+        iconName="barChart" // Podrías cambiar esto a "share" o algo similar en tu iconMap
+        visualType="link"   // <-- Asegurate de mapear "link" en tu module-section.tsx
       />
+  
 
-      <CTASection />
+  
+        <CTASection />
       <Footer />
     </main>
   )

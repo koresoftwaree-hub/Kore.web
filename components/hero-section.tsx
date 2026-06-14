@@ -114,7 +114,7 @@ export function HeroSection() {
               {/* Rotating orbit ring */}
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-0"
               >
                 {/* Orbiting modules (Actualizados a los 5 nuevos) */}
@@ -140,7 +140,7 @@ export function HeroSection() {
                       {/* Counter-rotate so labels stay upright */}
                       <motion.span
                         animate={{ rotate: -360 }}
-                        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                        transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
                         className="text-[#6B7280] text-xs font-medium"
                       >
                         {module.name}
@@ -162,27 +162,6 @@ export function HeroSection() {
                   </span>
                 </motion.div>
               </div>
-
-              {/* Connection lines */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 400 400">
-                {[-90, -18, 54, 126, 198].map((angle, i) => {
-                  const x = Math.cos((angle * Math.PI) / 180) * 120 + 200
-                  const y = Math.sin((angle * Math.PI) / 180) * 120 + 200
-                  return (
-                    <line
-                      key={i}
-                      x1="200"
-                      y1="200"
-                      x2={x}
-                      y2={y}
-                      stroke="#0A5A8C"
-                      strokeWidth="1"
-                      strokeDasharray="4 4"
-                      opacity="0.3"
-                    />
-                  )
-                })}
-              </svg>
             </div>
           </motion.div>
         </div>

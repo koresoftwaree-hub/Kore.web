@@ -31,6 +31,8 @@ const visualMap = {
   analytics: AnalyticsVisual,
   pos: POSVisual,
   booking: BookingVisual,
+  web: WebVisual,      // <- Agrega esto
+  link: LinkVisual     // <- Agrega esto
 } as const
 
 type IconName = keyof typeof iconMap
