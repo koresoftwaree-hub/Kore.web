@@ -146,7 +146,28 @@ export default function Home() {
         iconName="barChart" // Podrías cambiar esto a "share" o algo similar en tu iconMap
         visualType="link"   // <-- Asegurate de mapear "link" en tu module-section.tsx
       />
-  
+
+      {/* 06 | INTEGRACIONES */}
+      <ModuleSection
+        id="integraciones"
+        number="06"
+        name="Integraciones"
+        tagline="Conexión directa con tu comunidad."
+        description="Conecta tus apps directamente con los canales que tus clientes ya utilizan. Automatiza tu comunicación a través de WhatsApp y Correo Electrónico para mantener a tu comunidad activa y notificada en tiempo real."
+        features={[
+          {
+            title: "Loyalty (Fidelización)",
+            description: "Notificá a tus clientes por WhatsApp/Gmail, arma una comunidad, avisa de evento y descuentos exclusivos."
+          },
+          {
+            title: "Booking (Reservas)",
+            description: "Asegurá la asistencia enviando confirmaciones y recordatorios de turnos de forma automática al WhatsApp de tu cliente para reducir el ausentismo al mínimo."
+          }
+        ]}
+        iconName="messageCircle" 
+        visualType="integraciones" 
+        reversed={true}   // <-- Esto hace que la imagen quede a la izquierda y el texto a la derecha, alternando el diseño.
+      />
 
   
         <CTASection />

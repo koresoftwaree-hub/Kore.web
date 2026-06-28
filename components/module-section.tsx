@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, Heart, DollarSign, Package, BarChart3, ShoppingCart, Calendar } from "lucide-react"
+import { Check, Heart, DollarSign, Package, BarChart3, ShoppingCart, Calendar, MessageCircle, Mail } from "lucide-react"
 import { motion } from "motion/react"
 import { 
   LoyaltyVisual, 
@@ -22,6 +22,7 @@ const iconMap = {
   barChart: BarChart3,
   shoppingCart: ShoppingCart,
   calendar: Calendar,
+  messageCircle: MessageCircle,
 } as const
 
 const visualMap = {
@@ -31,8 +32,8 @@ const visualMap = {
   analytics: AnalyticsVisual,
   pos: POSVisual,
   booking: BookingVisual,
-  web: WebVisual,      // <- Agrega esto
-  link: LinkVisual     // <- Agrega esto
+  web: WebVisual,
+  link: LinkVisual,
 } as const
 
 type IconName = keyof typeof iconMap
@@ -50,7 +51,7 @@ interface ModuleSectionProps {
   description: string
   features: Feature[]
   iconName: IconName
-  visualType: "loyalty" | "finance" | "inventory" | "analytics" | "pos" | "booking"
+  visualType: "loyalty" | "finance" | "inventory" | "analytics" | "pos" | "booking" | "web" | "link" | "integraciones"
   reversed?: boolean
 }
 
@@ -66,16 +67,14 @@ export function ModuleSection({
   reversed = false,
 }: ModuleSectionProps) {
   const Icon = iconMap[iconName]
-  const Visual = visualMap[visualType]
+  const Visual = visualType !== "integraciones" ? visualMap[visualType as keyof typeof visualMap] : null
   
   return (
-    <section 
-      id={id} 
-      className="py-24 px-6 lg:px-12 border-t border-white/5"
-    >
+    <section id={id} className="py-24 px-6 lg:px-12 border-t border-white/5">
       <div className="max-w-7xl mx-auto">
         <div className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-center ${reversed ? 'lg:flex-row-reverse' : ''}`}>
-          {/* Content */}
+          
+          {/* Textos de la izquierda/derecha */}
           <motion.div
             className={reversed ? 'lg:order-2' : ''}
             initial={{ opacity: 0, x: reversed ? 40 : -40 }}
@@ -123,7 +122,7 @@ export function ModuleSection({
             </div>
           </motion.div>
           
-          {/* Visual */}
+          {/* Zona del Gráfico Visual */}
           <motion.div
             className={reversed ? 'lg:order-1' : ''}
             initial={{ opacity: 0, x: reversed ? -40 : 40, scale: 0.97 }}
@@ -133,7 +132,6 @@ export function ModuleSection({
           >
             {visualType === 'loyalty' ? (
               <>
-                {/* Estilos inyectados para la animación del humito */}
                 <style>{`
                   @keyframes safe-steam {
                     0% { transform: translateY(0); opacity: 0; }
@@ -148,17 +146,12 @@ export function ModuleSection({
                   .steam-delay-3 { animation-delay: 1s; }
                 `}</style>
 
-                {/* CONTENEDOR PRINCIPAL (Mantiene desplazamiento a la izquierda lg:-ml-12) */}
                 <div className="flex flex-col gap-8 lg:-ml-12 relative z-10 w-full max-w-[450px]">
-                  
-                  {/* PANEL 1: Tarjeta de Fidelización (Tacitas) */}
                   <div className="border border-white/10 bg-[#121212]/80 backdrop-blur-sm p-6 rounded-lg shadow-lg flex flex-col gap-5 transition-all duration-300 hover:border-[#0A5A8C]/40 hover:shadow-[0_8px_40px_-8px_rgba(10,90,140,0.35)]">
-                    {/* Cabecera (Se sacó "En vivo") */}
                     <div className="flex justify-between items-center pb-1">
                       <h4 className="text-xs font-mono text-white uppercase tracking-wider">Tarjeta de Fidelización</h4>
                     </div>
 
-                    {/* Zona de Tacitas (6 llenas, 4 vacías) */}
                     <div className="bg-[#0A0A0A] p-5 rounded-md border border-[#2A2A2A] flex flex-col gap-4">
                       <div className="flex justify-between items-center mb-1">
                         <span className="text-[#6B7280] text-xs font-mono uppercase tracking-wider">Progreso Cliente</span>
@@ -190,14 +183,11 @@ export function ModuleSection({
                     </div>
                   </div>
 
-                  {/* PANEL 2: Sistema de Puntos (Lista y Premios) */}
                   <div className="border border-white/10 bg-[#121212]/80 backdrop-blur-sm p-6 rounded-lg shadow-lg flex flex-col gap-6 transition-all duration-300 hover:border-[#0A5A8C]/40 hover:shadow-[0_8px_40px_-8px_rgba(10,90,140,0.35)]">
-                    {/* Cabecera (Cambió texto, se sacó "En vivo") */}
                     <div className="flex justify-between items-center pb-1">
                       <h4 className="text-xs font-mono text-white uppercase tracking-wider">Sistema de Puntos</h4>
                     </div>
 
-                    {/* Lista de Clientes */}
                     <div className="flex flex-col gap-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
@@ -228,7 +218,6 @@ export function ModuleSection({
                       </div>
                     </div>
 
-                    {/* Recuadros de Recompensas */}
                     <div className="grid grid-cols-2 gap-3 mt-1">
                       <div className="bg-[#1A1A1A] border border-[#2A2A2A] p-3 rounded-md flex flex-col items-center justify-center text-center">
                         <span className="text-white text-sm font-bold">100 pts</span>
@@ -240,11 +229,51 @@ export function ModuleSection({
                       </div>
                     </div>
                   </div>
-
                 </div>
               </>
+            ) : visualType === 'integraciones' ? (
+              <div className="relative z-10 w-full max-w-[450px] lg:-ml-6 flex flex-col justify-center py-8">
+                {/* Resplandor de fondo suave */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#0A5A8C]/10 blur-[80px] rounded-full pointer-events-none" />
+
+                <div className="relative flex flex-col gap-6">
+                  
+                  {/* Tarjeta 1: Notificación WhatsApp */}
+                  <div className="bg-[#121212]/90 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-2xl flex items-start gap-4 hover:border-[#25D366]/40 transition-colors z-20">
+                    <div className="bg-[#25D366]/10 p-2.5 rounded-full border border-[#25D366]/20 shrink-0 mt-0.5">
+                      <MessageCircle className="text-[#25D366] w-5 h-5" />
+                    </div>
+                    <div className="flex flex-col gap-1 w-full">
+                      <div className="flex items-center justify-between">
+                        <span className="text-white text-sm font-semibold">WhatsApp Automatizado</span>
+                        <span className="text-[#6B7280] text-[10px] font-mono">AHORA</span>
+                      </div>
+                      <p className="text-[#9CA3AF] text-sm leading-relaxed">
+                        ¡Hola! Tu turno para mañana a las 15:00hs está confirmado. Te esperamos. 📅
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Tarjeta 2: Notificación Email */}
+                  <div className="bg-[#121212]/90 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-2xl flex items-start gap-4 ml-8 sm:ml-12 hover:border-[#0A5A8C]/40 transition-colors z-10">
+                    <div className="bg-[#0A5A8C]/10 p-2.5 rounded-full border border-[#0A5A8C]/20 shrink-0 mt-0.5">
+                      <Mail className="text-[#0A5A8C] w-5 h-5" />
+                    </div>
+                    <div className="flex flex-col gap-1 w-full">
+                      <div className="flex items-center justify-between">
+                        <span className="text-white text-sm font-semibold">Mensaje de bienvenida</span>
+                        <span className="text-[#6B7280] text-[10px] font-mono">HACE 2 HS</span>
+                      </div>
+                      <p className="text-[#9CA3AF] text-sm leading-relaxed">
+                        ¡Hola, bienvenido a la comunidad de Kore! Contanos como fue tu experiencia
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
             ) : (
-              <Visual />
+              Visual && <Visual />
             )}
           </motion.div>
         </div>
