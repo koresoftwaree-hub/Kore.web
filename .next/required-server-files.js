@@ -105,7 +105,7 @@ self.__SERVER_FILES_MANIFEST={
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "C:\\Users\\Usuario\\Documents\\Kore\\WEB KORE\\WEB",
+    "outputFileTracingRoot": "C:\\Users\\Usuario\\Documents\\Kore\\kore WEB",
     "cacheComponents": false,
     "cacheLife": {
       "default": {
@@ -305,13 +305,14 @@ self.__SERVER_FILES_MANIFEST={
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.mjs",
     "turbopack": {
-      "root": "C:\\Users\\Usuario\\Documents\\Kore\\WEB KORE\\WEB"
+      "root": "C:\\Users\\Usuario\\Documents\\Kore\\kore WEB"
     },
     "distDirRoot": ".next"
   },
-  "appDir": "C:\\Users\\Usuario\\Documents\\Kore\\WEB KORE\\WEB",
+  "appDir": "C:\\Users\\Usuario\\Documents\\Kore\\kore WEB",
   "relativeAppDir": "",
   "files": [
+    ".next\\package.json",
     ".next\\routes-manifest.json",
     ".next\\server\\pages-manifest.json",
     ".next\\build-manifest.json",
